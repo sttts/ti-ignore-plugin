@@ -1,0 +1,23 @@
+{
+  "name": "ti-ignore-plugin",
+  "title": ".ti-ignore file support for ti build",
+  "description": "Don't copy ignored files into build directory according to an .gitignore-like .ti-ignore file",
+  "keywords": [
+    "titanium",
+    "gitignore",
+    "ignore"
+  ],
+  "version": "1.0.0",
+  "author": "Dr. Stefan Schimanski",
+  "maintainers": [
+    "Dr. Stefan Schimanski <stefan.schimanski@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sttts/ti-ignore-plugin"
+  },
+  "license": "GPL",
+  "dependencies": {
+    "ignore": "^2.2.15"
+  }
+}
