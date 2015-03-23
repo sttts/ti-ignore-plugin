@@ -35,7 +35,7 @@ exports.init = function (logger, config, cli, appc) {
 	    	var relative_source_file = source_file.withoutPrefix(projectDir + '/');
 
 			if (!ti_ignore_passing(source_file)) {
-				logger.error('Ignoring ' + relative_source_file + '...');
+				logger.info('Ignoring ' + relative_source_file.cyan + ' due to .ti-ignore');
 				build.fn = null;
 				finished(null, build);
 			} else {
