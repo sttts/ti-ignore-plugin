@@ -28,19 +28,21 @@ exports.init = function (logger, config, cli, appc) {
 		projectDir = build.projectDir;
 		finished();
 	});
-    cli.on("build.ios.copyResource", {
-    	pre: function (build, finished) {
+	cli.on("build.ios.copyResource", {
+		pre: function (build, finished) {
 	    	var source_file = build.args[0];
 	    	var target_file = build.args[1];
 	    	var relative_source_file = source_file.withoutPrefix(projectDir + '/');
 
-			if (!ti_ignore_passing(source_file)) {
-				logger.info('Ignoring ' + relative_source_file.cyan + ' due to .ti-ignore');
-				build.fn = null;
-				finished(null, build);
-			} else {
-				finished();
-			}
+			process.nextTick(function() {
+				if (!ti_ignore_passing(source_file)) {
+					logger.info('Ignoring ' + relative_source_file.cyan + ' due to .ti-ignore');
+					build.fn = null;
+					finished(null, build);
+				} else {
+					finished();
+				}
+			});
 		}
 	});
 };
