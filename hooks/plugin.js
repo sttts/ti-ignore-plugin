@@ -21,7 +21,11 @@ exports.init = function (logger, config, cli, appc) {
 	var ignore = require('ignore'),
 		fs = require('fs');
 	var ti_ignore_passing = ignore().addIgnoreFile(
-			ignore.select(['.ti-ignore'])
+			ignore.select([
+				'.titaniumignore',
+				'.tiignore',
+				'.ti-ignore'
+			])
 		).createFilter();
 
 	cli.on("build.pre.compile", function (build, finished) {
@@ -36,7 +40,7 @@ exports.init = function (logger, config, cli, appc) {
 
 			process.nextTick(function() {
 				if (!ti_ignore_passing(source_file)) {
-					logger.info('Ignoring ' + relative_source_file.cyan + ' due to .ti-ignore');
+					logger.info('Ignoring ' + relative_source_file.cyan + ' due to .tiignore');
 					build.fn = null;
 					finished(null, build);
 				} else {
