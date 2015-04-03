@@ -40,7 +40,7 @@ exports.init = function (logger, config, cli, appc) {
 
 			process.nextTick(function() {
 				if (!ti_ignore_passing(source_file)) {
-					logger.info('Ignoring ' + relative_source_file.cyan + ' due to .tiignore');
+					logger.debug('Ignoring ' + relative_source_file.cyan + ' due to .tiignore');
 					build.fn = null;
 					finished(null, build);
 				} else {
