@@ -27,16 +27,19 @@ exports.init = function (logger, config, cli, appc) {
 				'.ti-ignore'
 			])
 		).createFilter();
+	var ios = cli.argv.platform === 'iphone';
 
 	cli.on("build.pre.compile", function (build, finished) {
 		projectDir = build.projectDir;
 		finished();
 	});
-	cli.on("build.ios.copyResource", {
+
+	cli.on(ios ? "build.ios.copyResource" : "build.android.copyResource", {
 		pre: function (build, finished) {
-	    	var source_file = build.args[0];
-	    	var target_file = build.args[1];
-	    	var relative_source_file = source_file.withoutPrefix(projectDir + '/');
+			var source_file = build.args[0];
+			var target_file = build.args[1];
+			var relative_source_file = source_file.withoutPrefix(projectDir + '/');
+			var self = this;
 
 			process.nextTick(function() {
 				if (!ti_ignore_passing(source_file)) {
